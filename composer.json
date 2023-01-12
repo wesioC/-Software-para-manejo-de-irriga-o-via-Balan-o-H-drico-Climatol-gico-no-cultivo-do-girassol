@@ -1,0 +1,6 @@
+{
+    "name" : "wdev/open-weather-map",
+    "autoload": {
+        "psr-4": {"App\\":"model/"}
+    }
+}

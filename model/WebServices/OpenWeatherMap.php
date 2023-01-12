@@ -1,7 +1,7 @@
 <?php
 
-namespace model\webServices;
-class Openweathermap{
+namespace App\WebServices;
+class OpenWeatherMap{
 
     /**
      * URL base da API
@@ -16,11 +16,10 @@ class Openweathermap{
 
     public function __construct($apiKey)
     {
-        $this->$apiKey = $apiKey;
+        $this->apiKey = $apiKey;
     }
 }
 
 
 
 /* api.openweathermap.org/data/2.5/forecast?lat=-&lon=&appid=8789a15340530a700025aa7fa791908a */
-?>

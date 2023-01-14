@@ -18,6 +18,33 @@ class OpenWeatherMap{
     {
         $this->apiKey = $apiKey;
     }
+
+    public function preciptation($lat,$lon){
+        return $this->get('/data/2.5/forecast',['lat'=>$lat,'lon'=>$lon]);
+    }
+    private function get($resource,$params = []){
+        $params['units'] = 'metric';
+        $params['lang'] = 'pt_br';
+        $params['appid'] = $this->apiKey;
+    
+        $endpoint = self::BASE_URL.$resource.'?'.http_build_query($params);
+
+        $curl = curl_init();
+        
+        curl_setopt_array($curl,[
+        CURLOPT_URL => $endpoint,
+        CURLOPT_RETURNTRANSFER =>true,
+        CURLOPT_CUSTOMREQUEST => 'GET'
+        ]);
+        
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        return json_decode($response,true);
+    }
+    
+
 }
 
 

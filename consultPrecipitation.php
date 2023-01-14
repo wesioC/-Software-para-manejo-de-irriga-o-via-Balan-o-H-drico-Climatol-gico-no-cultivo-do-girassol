@@ -10,14 +10,13 @@
     
     if(!isset($argv[2])){
         die('Lat e Lon são obrigatórios');
-    }
-    $lat=$argv[1];
-    $lon=$argv[2];
+    } 
+    $lat = $argv[1];
+    $lon = $argv[2];
 
     $dadosPreciptacao = $obOpenWeatherMap->preciptation($lat,$lon);
-
     echo 'Lat: '.$lat.' Lon: '.$lon.'\n';
 
-    echo 'Preciptacao' .($dadosPreciptacao['list']['pop'] ?? 'Desconhecido').'\n';
-    
+    echo 'Preciptacao: ' .($dadosPreciptacao['list']['39']['pop'] ?? 'Desconhecido').'\n';  
  
+    

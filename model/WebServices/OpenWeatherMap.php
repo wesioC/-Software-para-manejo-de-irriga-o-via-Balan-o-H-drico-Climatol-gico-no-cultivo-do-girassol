@@ -23,6 +23,7 @@ class OpenWeatherMap{
         return $this->get('/data/2.5/forecast',['lat'=>$lat,'lon'=>$lon]);
     }
     private function get($resource,$params = []){
+    
         $params['units'] = 'metric';
         $params['lang'] = 'pt_br';
         $params['appid'] = $this->apiKey;
@@ -32,16 +33,16 @@ class OpenWeatherMap{
         $curl = curl_init();
         
         curl_setopt_array($curl,[
-        CURLOPT_URL => $endpoint,
-        CURLOPT_RETURNTRANSFER =>true,
-        CURLOPT_CUSTOMREQUEST => 'GET'
+            CURLOPT_URL => $endpoint,
+            CURLOPT_RETURNTRANSFER =>true,
+            CURLOPT_CUSTOMREQUEST => 'GET'
         ]);
         
         $response = curl_exec($curl);
 
         curl_close($curl);
 
-        return json_decode($response,true);
+        return json_decode($response,true); 
     }
     
 

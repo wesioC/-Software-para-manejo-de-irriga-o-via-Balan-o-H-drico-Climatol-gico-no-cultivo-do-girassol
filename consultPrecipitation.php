@@ -15,8 +15,21 @@
     $lon = $argv[2];
 
     $dadosPreciptacao = $obOpenWeatherMap->preciptation($lat,$lon);
-    echo 'Lat: '.$lat.' Lon: '.$lon.'\n';
+    echo 'Lat: '.$lat.' Lon: '.$lon."\n\n";
 
-    echo 'Preciptacao: ' .($dadosPreciptacao['list']['39']['pop'] ?? 'Desconhecido').'\n';  
- 
-    
+    echo 'Data: ' .($dadosPreciptacao['list']['0']['dt_txt']?? 'Desconhecido')."\n";
+    echo 'Chuva: ' .($dadosPreciptacao['list']['0']['rain']['3h']?? 'Desconhecido')."\n";
+    echo 'Probabilidade: ' .(($dadosPreciptacao['list']['0']['pop']*100).'%'?? 'Desconhecido')."\n";    
+    echo "\n\n";
+
+    echo 'Data: ' .($dadosPreciptacao['list']['1']['dt_txt']?? 'Desconhecido')."\n";
+    echo 'Chuva: ' .($dadosPreciptacao['list']['1']['rain']['3h']?? 'Desconhecido')."\n";
+    echo 'Probabilidade: ' .(($dadosPreciptacao['list']['1']['pop']*100).'%'?? 'Desconhecido')."\n";    
+    echo "\n\n";
+
+    echo 'Data: ' .($dadosPreciptacao['list']['2']['dt_txt']?? 'Desconhecido')."\n";
+    echo 'Chuva: ' .($dadosPreciptacao['list']['2']['rain']['3h']?? 'Desconhecido')."\n";
+    echo 'Probabilidade: ' .(($dadosPreciptacao['list']['2']['pop']*100).'%'?? 'Desconhecido')."\n";    
+    echo "\n\n";
+
+   // print_r($dadosPreciptacao);40.84639167888714, -74.06476536616998

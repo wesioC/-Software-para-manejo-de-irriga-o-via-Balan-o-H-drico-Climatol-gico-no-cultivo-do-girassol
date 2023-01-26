@@ -45,6 +45,7 @@ class OpenWeatherMap{
         return json_decode($response,true); 
     }
     
+    
 
 }
 

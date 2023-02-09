@@ -11,9 +11,9 @@
    /*  if(!isset($argv[2])){
         die('Lat e Lon são obrigatórios');
     }  */
-    $lat = -3.795545;
-    $lon = -63.120069;
-    
+    $lat = -17.804382150626626;
+    $lon = -50.90464177459235;
+
     $dadosPreciptacao = $obOpenWeatherMap->preciptation($lat,$lon);
     /* echo 'Lat: '.$lat.' Lon: '.$lon."\n\n";
 
@@ -39,6 +39,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <title>Home</title>
 </head>
@@ -52,40 +53,65 @@
         <div class="collapse navbar-collapse " id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home<span class="sr-only">(Página atual)</span></a>
+              <a class="nav-link" href="http://localhost/ic/index.php#">Home<span class="sr-only">(Página atual)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Central de controle</a>
+              <a class="nav-link" href="model/conection.php">Cenexão com BD</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost/phpmyadmin/index.php?route=/table/structure&db=ic&table=Valves">PHP MyAdmin</a>
+            </li>
+            
             <li class="nav-item">
               <a class="nav-link" href="#">RaspBarry PI</a>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Plantações
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Ver todas</a>
+                  <a class="dropdown-item" href="view/cadPlatation.html">Cadastrar</a>
+                  <a class="dropdown-item" href="#">Gerenciar</a>
+                </div>
+              </li>
           </ul>
         </div>
       </nav>
-      
+    
+      <div class="container-fluid p-0 m-0 d-flex justify-content-center inline-block">
+        <div class="card text-center shadow-lg m-3" style="max-width: 18rem;">
+          <div class="card-header">Localização:</div>
+            <div class="card-body inline-block">
+              <div class="date">Latitude:</div> <div class="latitude"><?php echo $lat?></div>
+              <div class="date">Longitude:</div><div class="longitude"><?php echo $lon?></div>
+          </div>
+        </div>
+      </div>
     <div class='row'>
       <div class="container-fluid p-0 m-0 d-flex justify-content-center inline-block">
         <!-- card 1 -->
-          <div class="card text-center shadow-lg m-3" style="max-width: 24rem;">
+          <div class="card text-center shadow-lg m-1" style="max-width: 24rem;">
               <div class="card-header ">CHUVA
               <div class="date"><?php echo $dadosPreciptacao['list']['0']['dt_txt']?></div>
               </div>
 
               <div class="card-body ">  
-                  <div class="latitude"><?php echo $lat?></div>
-                  <div class="longitude"><?php echo $lon?></div>
                   
                   <div class="probability"><?php echo ($dadosPreciptacao['list']['0']['pop']*100).'%'?></div>
+                  <div class="date"><?php echo ($dadosPreciptacao['list']['0']['rain']['3h']).'mm'?></div>
+                  
                   <div class="container-img">
                       <?php 
-                        if(($dadosPreciptacao['list']['0']['pop']*100)<30)
-                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
-                        else if(($dadosPreciptacao['list']['0']['pop']*100)>=30 && ($dadosPreciptacao['list']['0']['pop']*100)<50)
+                        if(($dadosPreciptacao['list']['0']['rain']['3h'])>=0.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<10.0)
                         echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
-                        else
+                        else if(($dadosPreciptacao['list']['0']['rain']['3h'])>=30.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<40.0)
+                        echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
+                        else if(($dadosPreciptacao['list']['0']['rain']['3h'])>=40.0)
                         echo'<img src="view/icons/icons8-chuva-intensa-96.png" alt="">';
-
+                        else
+                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
                       ?>
                       
                       <!-- <img src="view/icons/icons8-sem-chuva-80.png" alt=""> -->
@@ -96,24 +122,25 @@
           </div>
 
           <!-- card 2 -->
-          <div class="card text-center shadow-lg m-3" style="max-width: 24rem;">
+          <div class="card text-center shadow-lg m-1" style="max-width: 24rem;">
               <div class="card-header ">CHUVA
               <div class="date"><?php echo $dadosPreciptacao['list']['1']['dt_txt']?></div>
               </div>
 
               <div class="card-body ">  
-                  <div class="latitude"><?php echo $lat?></div>
-                  <div class="longitude"><?php echo $lon?></div>
                   
                   <div class="probability"><?php echo ($dadosPreciptacao['list']['1']['pop']*100).'%'?></div>
+                  <div class="date"><?php echo ($dadosPreciptacao['list']['1']['rain']['3h']).'mm'?></div>
                   <div class="container-img">
                       <?php 
-                        if(($dadosPreciptacao['list']['1']['pop']*100)<30)
-                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
-                        else if(($dadosPreciptacao['list']['1']['pop']*100)>=30 && ($dadosPreciptacao['list']['1']['pop']*100)<50)
+                        if(($dadosPreciptacao['list']['1']['rain']['3h'])>=0.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<10.0)
                         echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
-                        else
+                        else if(($dadosPreciptacao['list']['1']['rain']['3h'])>=30.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<40.0)
+                        echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
+                        else if(($dadosPreciptacao['list']['1']['rain']['3h'])>=40.0)
                         echo'<img src="view/icons/icons8-chuva-intensa-96.png" alt="">';
+                        else
+                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
                       ?>
                       
                       <!-- <img src="view/icons/icons8-sem-chuva-80.png" alt=""> -->
@@ -124,24 +151,26 @@
           </div>
           
           <!-- card 3 -->
-          <div class="card text-center shadow-lg m-3" style="max-width: 24rem;">
+          <div class="card text-center shadow-lg m-1" style="max-width: 24rem;">
               <div class="card-header ">CHUVA
               <div class="date"><?php echo $dadosPreciptacao['list']['2']['dt_txt']?></div>
               </div>
 
               <div class="card-body ">  
-                  <div class="latitude"><?php echo $lat?></div>
-                  <div class="longitude"><?php echo $lon?></div>
                   
                   <div class="probability"><?php echo ($dadosPreciptacao['list']['2']['pop']*100).'%'?></div>
+                  <div class="date"><?php echo ($dadosPreciptacao['list']['2']['rain']['3h']).'mm'?></div>
+                  <div class="container-img">
                   <div class="container-img">
                       <?php 
-                        if(($dadosPreciptacao['list']['2']['pop']*100)<30)
-                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
-                        else if(($dadosPreciptacao['list']['2']['pop']*100)>=30 && ($dadosPreciptacao['list']['2']['pop']*100)<50)
+                        if(($dadosPreciptacao['list']['2']['rain']['3h'])>=0.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<10.0)
                         echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
-                        else
+                        else if(($dadosPreciptacao['list']['2']['rain']['3h'])>=30.0 && ($dadosPreciptacao['list']['0']['rain']['3h'])<40.0)
+                        echo'<img src="view/icons/icons8-chuva-leve-2-96.png" alt="">';
+                        else if(($dadosPreciptacao['list']['2']['rain']['3h'])>=40.0)
                         echo'<img src="view/icons/icons8-chuva-intensa-96.png" alt="">';
+                        else
+                        echo'<img src="view/icons/icons8-sem-chuva-80.png" alt="">';
                       ?>
                       
                       <!-- <img src="view/icons/icons8-sem-chuva-80.png" alt=""> -->

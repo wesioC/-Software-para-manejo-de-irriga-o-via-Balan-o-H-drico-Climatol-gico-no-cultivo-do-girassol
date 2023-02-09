@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo&display=swap');
+
+body{
+    font-family: 'Arvo', serif;
+}
+
+.city{
+    font-size: 32px;
+}
+
+.date {
+    font-size: 16px;
+}
+
+.container-temp{
+    display: flex;
+    justify-content: center;
+    background-color: rgba(244, 208, 63, 0.2);
+    box-shadow: 5px 6px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+
+    font-size: 100px;
+    font-weight: 900;
+    text-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.probability{
+    font-size: 32px;
+}
+
+.latitude {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+}
+.longitude {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+}
+
+.lado{
+    display: inline-block;
+}
+
+.form {
+    /* Apenas para centralizar o form na página */
+    margin: 40px 0;
+    width: 400px;
+    /* Para ver as bordas do formulário */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+}
+
+main {
+    width: 940px;
+    margin: 0 auto;
+}
+
+

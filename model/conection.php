@@ -1,5 +1,5 @@
 <?php
-/*  $hostname = 'localhost';
+ $hostname = 'localhost';
  $bancodedados = 'ic';
  $usuario = 'root';
  $senha = '';
@@ -9,4 +9,4 @@
     echo"falha ao conectar:(".$mysqli->connect_errno.")".$mysqli->connect_errno;
  } else{
     echo"Conectado ao Banco de dados com sucesso!";
- } */
+ } 
